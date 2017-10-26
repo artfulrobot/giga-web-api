@@ -99,8 +99,8 @@ class GigaEmailSubscriptionAPI
 
   public function sendRequest($method, $query, $data=[]) {
 
-    // IF debugging.
-    $query['XDEBUG_SESSION_START'] = 'my_debug_key';
+    // If debugging, this can be handy.
+    // $query['XDEBUG_SESSION_START'] = 'my_debug_key';
 
     $query['psk'] = $this->psk;
     $url = $this->url . '?' . http_build_query($query);
