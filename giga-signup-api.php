@@ -43,7 +43,7 @@ class GigaEmailSubscriptionAPI
     if (!defined('GIGA_EMAIL_SUBSCRIPTION_API_PSK')) {
       throw new Exception("You need to define GIGA_EMAIL_SUBSCRIPTION_API_PSK to match that on the API server.");
     }
-    if (!in_array($method, ['getContactData', 'setContactData', 'getContactHash'])) {
+    if (!in_array($method, ['getContactData', 'setContactData', 'getContactHash', 'addSubscriber'])) {
       throw new InvalidArgumentException("Unimplemented method, '$method'");
     }
     $api = new static(GIGA_EMAIL_SUBSCRIPTION_API_ENDPOINT, GIGA_EMAIL_SUBSCRIPTION_API_PSK);
@@ -74,7 +74,18 @@ class GigaEmailSubscriptionAPI
    * @return array
    */
   public function setContactData($params) {
-    return $this->sendRequest('POST', ['method' => 'setContactData'], $params);
+    $query = ['method' => 'setContactData', 'hash' => $params['hash'], 'email' => $params['email']];
+    return $this->sendRequest('POST', $query, $params);
+  }
+  /**
+   * Send updated or new subscription data.
+   *
+   * @param array $params
+   * @return array
+   */
+  public function addSubscriber($params) {
+    $query = ['method' => 'addSubscriber'];
+    return $this->sendRequest('POST', $query, $params);
   }
   /**
    * Get a URL to authenticate a particular email to edit their data.
@@ -88,7 +99,9 @@ class GigaEmailSubscriptionAPI
 
   public function sendRequest($method, $query, $data=[]) {
 
+    // IF debugging.
     $query['XDEBUG_SESSION_START'] = 'my_debug_key';
+
     $query['psk'] = $this->psk;
     $url = $this->url . '?' . http_build_query($query);
 
@@ -146,7 +159,7 @@ class GigaEmailSubscriptionAPI
     }
 
     // Return successful result.
-    return ['error' => NULL, 'data' => $result];
+    return $result;
   }
 }
 
