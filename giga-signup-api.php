@@ -293,7 +293,7 @@ class GigaEmailSubscriptionAPI
         // Configured to not throw exceptions.
         if (!$result || !isset($result['error'])) {
           // The $result should be an array that contains an 'error' key.
-          $result = ['error' => 'Unknown error'];
+          $result = ['error' => 'Unknown error ' . $info['http_code']];
         }
         return $result;
       }
