@@ -65,6 +65,14 @@
  *     [journal_se_asia_en] => 0
  *     [working_papers_en] => 0
  *     [working_papers_de] => 0
+ *     [events] => 0
+ *     [press_global] => 0
+ *     [press_africa] => 0
+ *     [press_asia] => 0
+ *     [press_latin_america] => 0
+ *     [press_middle_east] => 0
+ *     [professional_background] => string: research|agency|policy|foundation|ngo|media|business|other
+ *     [institution] => 'Foo'
  * )
  *
  * Possible Errors
@@ -79,17 +87,19 @@
  *
  * $params = [
  *  // As with getContactData():
- *  'hash' => $_GET['hash'],
- *  'email' => $_GET['email'],
+ *  'hash'                    => $_GET['hash'],
+ *  'email'                   => $_GET['email'],
  *  // All that follow are optional. If you don't provide one, no change will happen.
  *  // Change subscriptions like this:
- *  'giga_en_latinamerica' => 1, // Subscribe to this list
- *  'giga_de_latinamerica' => 0, // Unsubscribe from this list
+ *  'giga_en_latinamerica'    => 1, // Subscribe to this list
+ *  'giga_de_latinamerica'    => 0, // Unsubscribe from this list
  *  // You can also change contact details.
- *  'first_name'        => 'Fred',
- *  'last_name'         => 'Flintstone',
- *  'individual_prefix' => 'Mr.', // must be registered with CiviCRM
- *  'new_email'         => 'new@example.com', // Note 'new_email'
+ *  'first_name'              => 'Fred',
+ *  'last_name'               => 'Flintstone',
+ *  'individual_prefix'       => 'Mr.', // must be registered with CiviCRM
+ *  'new_email'               => 'new@example.com', // Note 'new_email'
+ *  'professional_background' => '', // One of research|agency|policy|foundation|ngo|media|business|other
+ *  'institution'             => 'Institute of Something',
  * ];
  * $result = GigaEmailSubscriptionAPI::request('getContactData', $params);
  *
